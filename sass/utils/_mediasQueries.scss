@@ -1,0 +1,27 @@
+$pc : 1200px;
+$smallscreen : 1000px;
+$tablet : 768px;
+$phone : 576px;
+
+//Normal
+@mixin media-max($_max-width) {
+    @media screen and (max-width: $_max-width) {
+       @content;
+    }
+  }
+
+@include media-max($smallscreen) {
+    
+}
+
+//Mobile first
+@mixin media-min($_min-width) {
+  @media screen and (min-width: $_min-width) {
+      @content;
+  }
+}
+
+@include media-min($tablet) {
+    
+}
+

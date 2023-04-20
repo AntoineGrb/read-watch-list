@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+    <link rel ="stylesheet" href = ./public/style.css />
+	<link rel="icon" type="image/png" href="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!--Google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
+
+    <script src="script.js" type="module"> </script>
+</head>
+<body>
+    <header>
+        <div class="title"> <h1> Read&Watch List </h1> </div>
+        
+    </header>
+
+    <nav class="nav">
+        <!-- <div class="nav__list__mode">
+            <p> Dark-mode </p>
+            <button id="mode" class="dark-mode light-mode"> x </button>
+        </div> -->
+        <div class="nav__list">
+            <button class="btn btn__list btn__list--on"> On the list </button>
+            <button class="btn btn__list btn__list--completed"> Completed </button>
+        </div>
+        <div class="nav__filters">
+            <button class="btn btn__filters btn__filters--all"> All </button>
+            <button class="btn btn__filters btn__filters--books"> Books </button>
+            <button class="btn btn__filters btn__filters--movies"> Movies </button>
+            <button class="btn btn__filters btn__filters--tvshows"> TV shows </button>
+        </div>
+    </nav>
+
+    <main>
+        <div class="add">
+            <input type="text" placeholder="Add your next wish !">
+            <button> Add </button>
+        </div>
+
+        <div class="list">
+            <div class="list__title">
+                <h2> To read or watch : </h2>
+            </div>
+            <div class="list__content">
+                <div class="item">
+                    <div class="item__check">
+                        <input type="checkbox">
+                    </div>
+                    <div class="item__content">
+                        <div class="item__content__name">
+                            <p> Harry Potter </p>
+                        </div>
+                        <div class="item__content__theme theme--book">
+                            <p> <em> Livres </em> </p>
+                        </div>
+                    </div>
+                    <div class="item__trash">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item__check">
+                        <input type="checkbox">
+                    </div>
+                    <div class="item__content">
+                        <div class="item__content__name">
+                            <p> Harry Potter </p>
+                        </div>
+                        <div class="item__content__theme theme--book">
+                            <p> <em> Livres </em> </p>
+                        </div>
+                    </div>
+                    <div class="item__trash">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,238 @@
+@import "./utils/mediasQueries";
+
+//Variables
+:root{
+    //Couleurs
+        //Dark Theme
+        --background-dark:#293132;
+        --border-dark:white;
+        --main-color-dark:#B7C3F3;
+        --movie-dark : #F45B69;
+        --tv-dark:#FA9F42;
+        --book-dark:#28965A;
+
+    //Marges & padding
+    --margin-mobile:2rem;
+    --padding-mobile:0.7rem;
+    --padding-pc:1.5rem;
+}
+
+// General
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    background-color: var(--background-dark);
+    color: white;
+}
+
+body {
+    @include media-min($pc) {
+        max-width: 1200px;
+        margin: auto;
+    }
+}
+
+//Textes
+h1 , h2 {
+    font-family: 'Noto Serif JP', serif;
+}
+
+p , button {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    @include media-min($tablet) {
+        font-size: 0.9rem;
+    }
+}
+
+//Contenu
+
+// -------------- HEADER --------------
+header {
+    display: flex;
+    margin:var(--margin-mobile) 0 var(--margin-mobile) 0;
+    padding: 0 var(--padding-mobile) 0 var(--padding-mobile);
+    @include media-min($smallscreen) {
+        padding: 0 var(--padding-pc) 0 var(--padding-pc);
+        }
+}
+
+//------------- NAV BAR --------------
+// Mise en page
+nav {
+    margin: 0 0 var(--margin-mobile) 0;
+    padding: 0 var(--padding-mobile) 0 var(--padding-mobile);
+    min-width: 100%;
+    @include media-min($smallscreen) {
+        padding: 0 var(--padding-pc) 0 var(--padding-pc);
+        }
+
+    .nav__list {
+        display: flex;
+        margin: 0 0 var(--margin-mobile) 0;
+    }
+
+    .nav__filters {
+        display: flex;
+        margin: 0 0 var(--margin-mobile) 0;
+    }
+}
+
+//Les boutons
+.btn {
+    color : black;
+    width: 30vw;
+    height: 3rem;
+    border : 2px solid var(--background-dark);
+    background-color: white;
+    margin-right: 1vw;
+    padding: 0.5rem;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    transition: all 300;
+    @include media-min($smallscreen) {
+        width: 300px;
+        }
+
+    &:hover {
+    border-color:var(--main-color-dark);
+    }
+
+    &:active {
+    background-color: var(--main-color-dark);
+    border-color:var(--main-color-dark);
+    color:white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    @include media-min($tablet) {
+        font-size: 1rem;
+        }
+    }
+}
+
+.btn__filters {
+    width: 25vw;
+    height: 2.3rem;
+    @include media-min($smallscreen) {
+        width: 240px;
+        }
+
+    &--books {
+        &:hover {
+            border-color:var(--book-dark);
+        }
+        &:active {
+            background-color: var(--book-dark);
+            border-color:var(--book-dark);
+        }
+    }
+    &--movies {
+        &:hover {
+            border-color:var(--movie-dark);
+        }
+        &:active {
+            background-color: var(--movie-dark);
+            border-color:var(--movie-dark);
+        }
+    }
+    &--tvshows {
+        &:hover {
+            border-color:var(--tv-dark);
+        }
+        &:active {
+            background-color: var(--tv-dark);
+            border-color:var(--tv-dark);
+        }
+    }
+}
+
+// -------------- ADD BAR --------------
+.add {
+    display: flex;
+    align-items: center;
+    margin: 0 0 var(--margin-mobile) 0;
+    padding: 0 var(--padding-mobile) 0 var(--padding-mobile);
+    min-width: 100%;
+    justify-content: flex-start;
+    @include media-min($smallscreen) {
+        padding: 0 var(--padding-pc) 0 var(--padding-pc);
+        }
+
+    input {
+        width: 90%;
+        height: 2rem;
+        margin-right: 0px;
+        border:1px solid var(--border-dark);
+        padding: 0 0.5rem 0 0.5rem;
+        border-radius: 2px;
+    }
+
+    button {
+        width: 15%;
+        height: 2.15rem;
+        background-color: var(--main-color-dark);
+        border: 1px solid var(--background-dark);
+        border-radius: 2px;
+        color : white;
+        font-weight: bold;
+        @include media-min($smallscreen) {
+            width: 150px;
+            }
+    }
+}
+
+// -------------- LIST --------------
+.list {
+    margin: 0 0 var(--margin-mobile) 0;
+    padding: 0 var(--padding-mobile) 0 var(--padding-mobile);
+    @include media-min($smallscreen) {
+        padding: 0 var(--padding-pc) 0 var(--padding-pc);
+        }
+
+    &__title {
+        margin-bottom: 10px;
+    }
+
+    &__content {
+
+        .item {
+            display: flex;
+            border: 1px solid var(--border-dark);
+            margin-top: -1px;
+            padding: 0.5rem;
+            position: relative;
+
+            &__check {
+                margin-top: 2px;
+                margin-right: 12px;
+            }
+
+            &__content {
+                margin-right: 12px;
+
+                &__name {
+                    margin-bottom: 5px;
+                }
+            }
+
+            &__trash {
+                position: absolute;
+                top:30%;
+                right: 0;
+                margin-right: 12px;
+
+                > i {
+                    font-size: 1.2rem;
+                    color: var(--main-color-dark);
+                }
+            }
+        }
+    }
+}
+
+.theme--book em {
+    color:var(--book-dark);
+    font-size: 0.8rem;
+}

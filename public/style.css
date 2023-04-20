@@ -1,0 +1,218 @@
+:root {
+  --background-dark:#293132;
+  --border-dark:white;
+  --main-color-dark:#B7C3F3;
+  --movie-dark: #F45B69;
+  --tv-dark:#FA9F42;
+  --book-dark:#28965A;
+  --margin-mobile:2rem;
+  --padding-mobile:0.7rem;
+  --padding-pc:1.5rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--background-dark);
+  color: white;
+}
+
+@media screen and (min-width: 1200px) {
+  body {
+    max-width: 1200px;
+    margin: auto;
+  }
+}
+
+h1, h2 {
+  font-family: "Noto Serif JP", serif;
+}
+
+p, button {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+@media screen and (min-width: 768px) {
+  p, button {
+    font-size: 0.9rem;
+  }
+}
+
+header {
+  display: flex;
+  margin: var(--margin-mobile) 0 var(--margin-mobile) 0;
+  padding: 0 var(--padding-mobile) 0 var(--padding-mobile);
+}
+@media screen and (min-width: 1000px) {
+  header {
+    padding: 0 var(--padding-pc) 0 var(--padding-pc);
+  }
+}
+
+nav {
+  margin: 0 0 var(--margin-mobile) 0;
+  padding: 0 var(--padding-mobile) 0 var(--padding-mobile);
+  min-width: 100%;
+}
+@media screen and (min-width: 1000px) {
+  nav {
+    padding: 0 var(--padding-pc) 0 var(--padding-pc);
+  }
+}
+nav .nav__list {
+  display: flex;
+  margin: 0 0 var(--margin-mobile) 0;
+}
+nav .nav__filters {
+  display: flex;
+  margin: 0 0 var(--margin-mobile) 0;
+}
+
+.btn {
+  color: black;
+  width: 30vw;
+  height: 3rem;
+  border: 2px solid var(--background-dark);
+  background-color: white;
+  margin-right: 1vw;
+  padding: 0.5rem;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  transition: all 300;
+}
+@media screen and (min-width: 1000px) {
+  .btn {
+    width: 300px;
+  }
+}
+.btn:hover {
+  border-color: var(--main-color-dark);
+}
+.btn:active {
+  background-color: var(--main-color-dark);
+  border-color: var(--main-color-dark);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+@media screen and (min-width: 768px) {
+  .btn:active {
+    font-size: 1rem;
+  }
+}
+
+.btn__filters {
+  width: 25vw;
+  height: 2.3rem;
+}
+@media screen and (min-width: 1000px) {
+  .btn__filters {
+    width: 240px;
+  }
+}
+.btn__filters--books:hover {
+  border-color: var(--book-dark);
+}
+.btn__filters--books:active {
+  background-color: var(--book-dark);
+  border-color: var(--book-dark);
+}
+.btn__filters--movies:hover {
+  border-color: var(--movie-dark);
+}
+.btn__filters--movies:active {
+  background-color: var(--movie-dark);
+  border-color: var(--movie-dark);
+}
+.btn__filters--tvshows:hover {
+  border-color: var(--tv-dark);
+}
+.btn__filters--tvshows:active {
+  background-color: var(--tv-dark);
+  border-color: var(--tv-dark);
+}
+
+.add {
+  display: flex;
+  align-items: center;
+  margin: 0 0 var(--margin-mobile) 0;
+  padding: 0 var(--padding-mobile) 0 var(--padding-mobile);
+  min-width: 100%;
+  justify-content: flex-start;
+}
+@media screen and (min-width: 1000px) {
+  .add {
+    padding: 0 var(--padding-pc) 0 var(--padding-pc);
+  }
+}
+.add input {
+  width: 90%;
+  height: 2rem;
+  margin-right: 0px;
+  border: 1px solid var(--border-dark);
+  padding: 0 0.5rem 0 0.5rem;
+  border-radius: 2px;
+}
+.add button {
+  width: 15%;
+  height: 2.15rem;
+  background-color: var(--main-color-dark);
+  border: 1px solid var(--background-dark);
+  border-radius: 2px;
+  color: white;
+  font-weight: bold;
+}
+@media screen and (min-width: 1000px) {
+  .add button {
+    width: 150px;
+  }
+}
+
+.list {
+  margin: 0 0 var(--margin-mobile) 0;
+  padding: 0 var(--padding-mobile) 0 var(--padding-mobile);
+}
+@media screen and (min-width: 1000px) {
+  .list {
+    padding: 0 var(--padding-pc) 0 var(--padding-pc);
+  }
+}
+.list__title {
+  margin-bottom: 10px;
+}
+.list__content .item {
+  display: flex;
+  border: 1px solid var(--border-dark);
+  margin-top: -1px;
+  padding: 0.5rem;
+  position: relative;
+}
+.list__content .item__check {
+  margin-top: 2px;
+  margin-right: 12px;
+}
+.list__content .item__content {
+  margin-right: 12px;
+}
+.list__content .item__content__name {
+  margin-bottom: 5px;
+}
+.list__content .item__trash {
+  position: absolute;
+  top: 30%;
+  right: 0;
+  margin-right: 12px;
+}
+.list__content .item__trash > i {
+  font-size: 1.2rem;
+  color: var(--main-color-dark);
+}
+
+.theme--book em {
+  color: var(--book-dark);
+  font-size: 0.8rem;
+}
+
+/*# sourceMappingURL=style.css.map */
