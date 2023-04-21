@@ -18,14 +18,16 @@
 <body>
     <header>
         <div class="title"> <h1> Read&Watch List </h1> </div>
-        
+        <div class="mode">
+            <p> Mode : </p>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
     </header>
 
     <nav class="nav">
-        <!-- <div class="nav__list__mode">
-            <p> Dark-mode </p>
-            <button id="mode" class="dark-mode light-mode"> x </button>
-        </div> -->
         <div class="nav__list">
             <button class="btn btn__list btn__list--on"> On the list </button>
             <button class="btn btn__list btn__list--completed"> Completed </button>
@@ -33,7 +35,7 @@
         <div class="nav__filters">
             <button class="btn btn__filters btn__filters--all"> All </button>
             <button class="btn btn__filters btn__filters--books"> Books </button>
-            <button class="btn btn__filters btn__filters--movies"> Movies </button>
+            <button class="btn btn__filters btn__filters--movies"> <i class="fas fa-clapperboard"></i> Movies </button> 
             <button class="btn btn__filters btn__filters--tvshows"> TV shows </button>
         </div>
     </nav>
@@ -58,7 +60,7 @@
                             <p> Harry Potter </p>
                         </div>
                         <div class="item__content__theme theme--book">
-                            <p> <em> Livres </em> </p>
+                            <p> <em> <i class="fas fa-tv"></i> <i class="fas fa-film"></i> <i class="fas fa-book-open"></i> Livres </em> </p>
                         </div>
                     </div>
                     <div class="item__trash">

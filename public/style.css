@@ -2,12 +2,14 @@
   --background-dark:#293132;
   --border-dark:white;
   --main-color-dark:#B7C3F3;
+  --hover-color-dark:#798acf;
   --movie-dark: #F45B69;
   --tv-dark:#FA9F42;
   --book-dark:#28965A;
-  --margin-mobile:2rem;
+  --margin-mobile:1.5rem;
   --padding-mobile:0.7rem;
   --padding-pc:1.5rem;
+  --margin-pc: 4rem;
 }
 
 * {
@@ -18,37 +20,131 @@
   color: white;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1000px) {
   body {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: auto;
   }
 }
 
-h1, h2 {
+h1 {
   font-family: "Noto Serif JP", serif;
+  font-size: 1.6rem;
+}
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 1.9rem;
+  }
+}
+@media screen and (min-width: 1000px) {
+  h1 {
+    font-size: 2.1rem;
+  }
 }
 
-p, button {
+h2 {
+  font-family: "Noto Serif JP", serif;
+  font-size: 1.3rem;
+}
+@media screen and (min-width: 768px) {
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+@media screen and (min-width: 1000px) {
+  h2 {
+    font-size: 1.7rem;
+  }
+}
+
+p, input {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+}
+@media screen and (min-width: 768px) {
+  p, input {
+    font-size: 1rem;
+  }
+}
+
+button {
   font-family: "Montserrat", sans-serif;
   font-size: 0.7rem;
   font-weight: 500;
 }
 @media screen and (min-width: 768px) {
-  p, button {
+  button {
     font-size: 0.9rem;
   }
 }
 
 header {
   display: flex;
-  margin: var(--margin-mobile) 0 var(--margin-mobile) 0;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 2rem 0 2.5rem 0;
   padding: 0 var(--padding-mobile) 0 var(--padding-mobile);
 }
 @media screen and (min-width: 1000px) {
   header {
     padding: 0 var(--padding-pc) 0 var(--padding-pc);
+    margin: 2rem 0 4rem 0;
   }
+}
+
+.mode {
+  display: flex;
+  align-items: center;
+}
+.mode > p {
+  margin-right: 7px;
+  font-size: 0.8rem;
+}
+.mode .switch {
+  font-size: 13px;
+  position: relative;
+  display: inline-block;
+  width: 3.5em;
+  height: 2em;
+}
+.mode .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.mode .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 30px;
+  box-shadow: 0 0 0 2px var(--main-color-dark);
+  border: 4px solid transparent;
+  overflow: hidden;
+  transition: 0.4s;
+  background: transparent;
+}
+.mode .slider:before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  background-color: var(--main-color-dark);
+  transform: translateX(-50%);
+  transition: 0.4s;
+}
+.mode input:checked + .slider {
+  background-color: white;
+}
+.mode input:focus:checked + .slider {
+  box-shadow: 0 0 0 2px white, 0 0 4px white;
+}
+.mode input:checked + .slider:before {
+  transform: translateX(1.5em);
 }
 
 nav {
@@ -59,11 +155,12 @@ nav {
 @media screen and (min-width: 1000px) {
   nav {
     padding: 0 var(--padding-pc) 0 var(--padding-pc);
+    margin: 0 0 var(--margin-pc) 0;
   }
 }
 nav .nav__list {
   display: flex;
-  margin: 0 0 var(--margin-mobile) 0;
+  margin: 0 0 1rem 0;
 }
 nav .nav__filters {
   display: flex;
@@ -94,7 +191,7 @@ nav .nav__filters {
   background-color: var(--main-color-dark);
   border-color: var(--main-color-dark);
   color: white;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 600;
 }
 @media screen and (min-width: 768px) {
@@ -106,6 +203,7 @@ nav .nav__filters {
 .btn__filters {
   width: 25vw;
   height: 2.3rem;
+  transition: all 100ms;
 }
 @media screen and (min-width: 1000px) {
   .btn__filters {
@@ -145,11 +243,12 @@ nav .nav__filters {
 @media screen and (min-width: 1000px) {
   .add {
     padding: 0 var(--padding-pc) 0 var(--padding-pc);
+    margin: 0 0 var(--margin-mobile) 0;
   }
 }
 .add input {
   width: 90%;
-  height: 2rem;
+  height: 2.8rem;
   margin-right: 0px;
   border: 1px solid var(--border-dark);
   padding: 0 0.5rem 0 0.5rem;
@@ -157,17 +256,22 @@ nav .nav__filters {
 }
 .add button {
   width: 15%;
-  height: 2.15rem;
+  height: 2.9rem;
   background-color: var(--main-color-dark);
   border: 1px solid var(--background-dark);
   border-radius: 2px;
   color: white;
   font-weight: bold;
+  cursor: pointer;
+  transition: all 100ms;
 }
 @media screen and (min-width: 1000px) {
   .add button {
     width: 150px;
   }
+}
+.add button:hover {
+  background-color: var(--hover-color-dark);
 }
 
 .list {
@@ -177,6 +281,7 @@ nav .nav__filters {
 @media screen and (min-width: 1000px) {
   .list {
     padding: 0 var(--padding-pc) 0 var(--padding-pc);
+    margin: 0 0 var(--margin-pc) 0;
   }
 }
 .list__title {
@@ -184,14 +289,16 @@ nav .nav__filters {
 }
 .list__content .item {
   display: flex;
-  border: 1px solid var(--border-dark);
-  margin-top: -1px;
-  padding: 0.5rem;
+  border-bottom: 1px solid var(--border-dark);
+  padding: 1rem 0.5rem 0.5rem 0.5rem;
   position: relative;
 }
 .list__content .item__check {
   margin-top: 2px;
   margin-right: 12px;
+}
+.list__content .item__check input:checked {
+  background-color: red;
 }
 .list__content .item__content {
   margin-right: 12px;
@@ -213,6 +320,23 @@ nav .nav__filters {
 .theme--book em {
   color: var(--book-dark);
   font-size: 0.8rem;
+}
+
+.fa-book-open {
+  color: var(--book-dark);
+  background-color: var(--background-dark);
+}
+
+.fa-tv {
+  color: var(--tv-dark);
+  background-color: var(--background-dark);
+  font-size: 0.8rem;
+}
+
+.fa-film {
+  color: var(--movie-dark);
+  background-color: var(--background-dark);
+  font-size: 0.9rem;
 }
 
 /*# sourceMappingURL=style.css.map */
