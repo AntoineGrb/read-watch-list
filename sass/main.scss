@@ -9,7 +9,7 @@
         --border-dark:white;
         --main-color-dark:#B7C3F3;
         --hover-color-dark:#798acf;
-        --movie-dark : #F45B69;
+        --film-dark : #F45B69;
         --tv-dark:#FA9F42;
         --book-dark:#28965A;
 
@@ -18,6 +18,9 @@
     --padding-mobile:0.7rem;
     --padding-pc:1.5rem;
     --margin-pc: 4rem;
+
+    //Animations
+    --animate-duration: 4000ms;
 }
 
 //Document
@@ -187,6 +190,7 @@ nav {
     border-radius: 5px;
     letter-spacing: 1px;
     transition: all 300;
+    cursor: pointer;
     @include media-min($smallscreen) {
         width: 300px;
         }
@@ -195,7 +199,7 @@ nav {
     border-color:var(--main-color-dark);
     }
 
-    &:active {
+    &.active {
     background-color: var(--main-color-dark);
     border-color:var(--main-color-dark);
     color:white;
@@ -219,25 +223,25 @@ nav {
         &:hover {
             border-color:var(--book-dark);
         }
-        &:active {
+        &.active {
             background-color: var(--book-dark);
             border-color:var(--book-dark);
         }
     }
-    &--movies {
+    &--films {
         &:hover {
-            border-color:var(--movie-dark);
+            border-color:var(--film-dark);
         }
-        &:active {
-            background-color: var(--movie-dark);
-            border-color:var(--movie-dark);
+        &.active {
+            background-color: var(--film-dark);
+            border-color:var(--film-dark);
         }
     }
     &--tvshows {
         &:hover {
             border-color:var(--tv-dark);
         }
-        &:active {
+        &.active {
             background-color: var(--tv-dark);
             border-color:var(--tv-dark);
         }
@@ -287,6 +291,7 @@ nav {
 }
 
 // -------------- LIST --------------
+//To do list
 .list {
     margin: 0 0 var(--margin-mobile) 0;
     padding: 0 var(--padding-mobile) 0 var(--padding-mobile);
@@ -341,8 +346,18 @@ nav {
 }
 
 //Theme tags
-.theme--book em {
+.theme--books em {
     color:var(--book-dark);
+    font-size: 0.8rem;
+}
+
+.theme--films em {
+    color:var(--film-dark);
+    font-size: 0.8rem;
+}
+
+.theme--tv em {
+    color:var(--tv-dark);
     font-size: 0.8rem;
 }
 
@@ -358,7 +373,12 @@ nav {
 }
 
 .fa-film {
-    color:var(--movie-dark);
+    color:var(--film-dark);
     background-color: var(--background-dark);
     font-size: 0.9rem;
 }
+
+.animate__animated.animate__fadeInUp {
+    --animate-duration: 400ms;
+    --animate-timing-function: ease-in-out; 
+  }

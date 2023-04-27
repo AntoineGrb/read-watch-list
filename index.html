@@ -7,6 +7,7 @@
     <link rel ="stylesheet" href = ./public/style.css />
 	<link rel="icon" type="image/png" href="./Images/wish-list 2.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"> <!--Google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
@@ -29,21 +30,21 @@
 
     <nav class="nav">
         <div class="nav__list">
-            <button class="btn btn__list btn__list--on"> On the list </button>
-            <button class="btn btn__list btn__list--completed"> Completed </button>
+            <button class="btn btn__list btn__list--on active">On the list</button>
+            <button class="btn btn__list btn__list--completed">Completed</button>
         </div>
         <div class="nav__filters">
-            <button class="btn btn__filters btn__filters--all"> All </button>
-            <button class="btn btn__filters btn__filters--books"> Books </button>
-            <button class="btn btn__filters btn__filters--movies"> <i class="fas fa-clapperboard"></i> Movies </button> 
-            <button class="btn btn__filters btn__filters--tvshows"> TV shows </button>
+            <button class="btn btn__filters btn__filters--all active">All</button>
+            <button class="btn btn__filters btn__filters--books">Books</button>
+            <button class="btn btn__filters btn__filters--films">Films</button> 
+            <button class="btn btn__filters btn__filters--tvshows">TV shows</button>
         </div>
     </nav>
 
     <main>
         <div class="add">
-            <input type="text" placeholder="Add your next wish !">
-            <button> Add </button>
+            <input id= "input__add" type="text" placeholder="Add your next wish !">
+            <button id="btn__add"> Add </button>
         </div>
 
         <div class="list">
@@ -51,7 +52,7 @@
                 <h2> To read or watch : </h2>
             </div>
             <div class="list__content">
-                <div class="item">
+                <div class="item" id="0">
                     <div class="item__check">
                         <input type="checkbox">
                     </div>
@@ -59,24 +60,8 @@
                         <div class="item__content__name">
                             <p> Harry Potter </p>
                         </div>
-                        <div class="item__content__theme theme--book">
-                            <p> <em> <i class="fas fa-tv"></i> <i class="fas fa-film"></i> <i class="fas fa-book-open"></i> Livres </em> </p>
-                        </div>
-                    </div>
-                    <div class="item__trash">
-                        <i class="fas fa-trash"></i>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="item__check">
-                        <input type="checkbox">
-                    </div>
-                    <div class="item__content">
-                        <div class="item__content__name">
-                            <p> Harry Potter </p>
-                        </div>
-                        <div class="item__content__theme theme--book">
-                            <p> <em> Livres </em> </p>
+                        <div class="item__content__theme theme--books">
+                            <p> <em> <i class="fas fa-book-open"></i> Livres </em> </p>
                         </div>
                     </div>
                     <div class="item__trash">
