@@ -25,6 +25,7 @@
   body {
     max-width: 1000px;
     margin: auto;
+    overflow-y: scroll;
   }
 }
 
@@ -274,6 +275,27 @@ nav .nav__filters {
 }
 .add button:hover {
   background-color: var(--hover-color-dark);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  height: 30%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+.modal__content {
+  background-color: rgba(0, 0, 0, 0.9);
+  margin: 15% auto;
+  padding: 20px;
+}
+.modal__content > h3, .modal__content button {
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 .list {

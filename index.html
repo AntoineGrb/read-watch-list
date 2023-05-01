@@ -27,29 +27,40 @@
             </label>
         </div>
     </header>
-
+<!----------- LES FILTRES ------------>
     <nav class="nav">
         <div class="nav__list">
-            <button class="btn btn__list btn__list--on active">On the list</button>
-            <button class="btn btn__list btn__list--completed">Completed</button>
+            <button class="btn btn__list btn__list--on active" value="On the list">On the list</button>
+            <button class="btn btn__list btn__list--completed" value="Completed">Completed</button>
         </div>
         <div class="nav__filters">
-            <button class="btn btn__filters btn__filters--all active">All</button>
-            <button class="btn btn__filters btn__filters--books">Books</button>
-            <button class="btn btn__filters btn__filters--films">Films</button> 
-            <button class="btn btn__filters btn__filters--tvshows">TV shows</button>
+            <button class="btn btn__filters btn__filters--all active" value="All">All</button>
+            <button class="btn btn__filters btn__filters--books" value="Books">Books</button>
+            <button class="btn btn__filters btn__filters--films" value="Films">Films</button> 
+            <button class="btn btn__filters btn__filters--tvshows" value="TV shows">TV shows</button>
         </div>
     </nav>
 
     <main>
+<!----------- LA BARRE D'AJOUT ------------>
         <div class="add">
             <input id= "input__add" type="text" placeholder="Add your next wish !">
             <button id="btn__add"> Add </button>
         </div>
+        <!----------- Fenêtre modale de sélection du thème ------------>
+        <div id="my-modal" class="modal">
+            <div class="modal__content">
+                <h3> Sélectionner le thème </h3>
+                <button class="theme" value="Books"> Books </button>
+                <button class="theme" value="Films"> Movies </button>
+                <button class="theme" value="TV shows"> TV shows </button>
+            </div>
+        </div>
 
+<!----------- LA LISTE ------------>
         <div class="list">
             <div class="list__title">
-                <h2> To read or watch : </h2>
+                <h2> To watch & read : </h2>
             </div>
             <div class="list__content">
                 <div class="item" id="0">
@@ -70,7 +81,6 @@
                 </div>
             </div>
         </div>
-        
     </main>
 
 </body>

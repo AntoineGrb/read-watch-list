@@ -1,4 +1,4 @@
-//Variables & constantes
+//#region VARIABLES
     //Boutons de sélection
     const btnListOn = document.querySelector(".btn__list--on");
     const btnListCompleted = document.querySelector(".btn__list--completed");
@@ -6,11 +6,17 @@
     const btnListBooks = document.querySelector(".btn__filters--film");
     const btnListFilm = document.querySelector(".btn__filters--film");
     const btnListTv = document.querySelector(".btn__filters--tvshows");
+
     //Barre ajout tâche
     const inputAdd = document.querySelector("#input__add");
     const btnAdd = document.querySelector("#btn__add");
+    const modal = document.querySelector("#my-modal");
+    const themes = document.querySelectorAll(".theme");
+
     //Liste
     const list = document.querySelector(".list__content");
+    const listTitle = document.querySelector(".list__title > h2");
+
     //Déclaration des items
     let items = [];
     class Item {
@@ -21,18 +27,18 @@
             this.checked = checked;
         }
     };
+//#endregion
 
 //#region CREER UN NOUVEL ITEM 
     //Fonction : Créer le nouvel objet item
-    function addItem(items, animate) {
+    async function addItem(items, itemTheme, animate) {
         const itemId = items.length;
         const itemName = inputAdd.value;
-        const itemTheme = `${btnFilterActive}`;
         if (itemTheme === "All") {
-            alert("Sélectionner un thème pour ajouter un item !"); //!Ajouter une fenêtre perso au lieu de l'alerte
-            return
+            itemTheme = await openModal();
         }
-        let item = new Item(itemId,itemName,itemTheme,false);
+        console.log(itemTheme);
+        let item = new Item(itemId,itemName,itemTheme,false); 
         items.push(item);
         console.log("items :" , items);
 
@@ -90,33 +96,63 @@
     btnAdd.addEventListener("click" , (e) => {
         e.preventDefault();
         if (inputAdd.value === "") {
-            alert("Vous devez saisir quelque chose pour valider !") //!Ajouter une fenêtre perso au lieu de l'alerte
+            alert("Vous devez saisir quelque chose pour valider !")
             return
         }
-        addItem(items,true);
+        const activeTheme = `${btnFilterActive}`;
+        addItem(items,activeTheme, true);
     });
+
+    //Event : presser Entrée
+    document.addEventListener("keyup" , (e) => {
+        e.preventDefault();
+        if (e.key === "Enter") {
+            if (inputAdd.value === "") {
+                alert("Vous devez saisir quelque chose pour valider !")
+                return
+            }
+            const activeTheme = `${btnFilterActive}`;
+            addItem(items,activeTheme, true);
+        }
+    })
+//#endregion
+
+//#region GERER LA FENÊTRE MODALE
+//La fenêtre modale apparait lors de l'ajout d'une nouvelle tâche sans sélection d'un filtre préalable
+function openModal() {
+    return new Promise((resolve) => { //La promise permet d'attendre la sélection pour continuer le code
+        modal.style.display = "block";
+
+        themes.forEach(theme => {
+            theme.addEventListener("click", (e) => {
+                const selectedValue = e.target.value;
+                modal.style.display = "none";
+                resolve(selectedValue);
+            });
+        });
+    });
+}
 //#endregion
 
 //#region GERER LES FILTRES
     //Les boutons List
     let btnListActive = "On the list";
-    console.log(btnListActive);
     let btnList = document.querySelectorAll(".btn__list");
     btnList.forEach(btn => {
         //Clic sur les boutons
         btn.addEventListener("click" , () => {
+            //Activer/désactiver les class active
             btnList.forEach(otherBtnList => {
                 if (otherBtnList !== btn) {
                     otherBtnList.classList.remove("active");
                 }
             });
             btn.classList.add("active");
-            btnListActive = btn.textContent;
-            console.log(btnListActive);
+            btnListActive = btn.value;
         });
     });
 
-    //Mise en forme des boutons Filtres
+    //Les boutons Filtres
     let btnFilterActive = "All";
     let btnFilters = document.querySelectorAll(".btn__filters");
     btnFilters.forEach(btn => {
@@ -131,7 +167,7 @@
             btn.classList.add("active");
 
             //Appliquer le filtre sélectionné au DOM
-            btnFilterActive = btn.textContent;
+            btnFilterActive = btn.value;
             let itemsFilter = [];
             if (btnFilterActive === "All") { //Si All on sélectionne tous les items
                 itemsFilter = items;
@@ -142,6 +178,20 @@
                 const itemHTML = createItemHTML(itemFilter,false);
                 list.insertAdjacentHTML("beforeend" , itemHTML);
             });
+
+            //Mettre à jour le titre de la liste
+            switch (btnFilterActive) {
+                case "Books" : 
+                    listTitle.textContent = "To read :";
+                break
+                case "Films" :
+                    listTitle.textContent = "To watch :";
+                break
+                case "TV shows" :
+                    listTitle.textContent = "To watch :";
+                break
+                default : listTitle.textContent = "To watch & read :";
+            };
         });
     }); 
 //#endregion
