@@ -32,7 +32,7 @@
 //#region CREER UN NOUVEL ITEM 
     //Fonction : Créer le nouvel objet item
     async function addItem(items, itemTheme, animate) {
-        const itemId = items.length;
+        const itemId = items.length === 0 ? 0 : items[items.length - 1].id + 1;
         const itemName = inputAdd.value;
         if (itemTheme === "All") {
             itemTheme = await openModal();
@@ -41,17 +41,19 @@
         let item = new Item(itemId,itemName,itemTheme,false); 
         items.push(item);
         console.log("items :" , items);
+        console.log("itemsOnList :" , itemsOnList);
 
         //Appel à la fonction pour créer l'objet HTML
-        const itemHTML = createItemHTML(item, animate);
+        const itemHTML = createItemHTML(item, false, animate);
         list.insertAdjacentHTML("beforeend" , itemHTML);
         inputAdd.value = "";
     };
 
     //Fonction : Ajouter l'objet item au DOM
-    function createItemHTML(item, animate) {
+    function createItemHTML(item, checked, animate) {
         let themeIcon;
         let themeClass;
+        let checkClass = checked === true ? "check" : "";
         //Les class et icones en fonction du thème
         switch (item.theme) {
             case "Books" : 
@@ -71,17 +73,17 @@
         //L'animation déclenchée ou non selon le clic
         let animateFadeInUp;
         if (animate) {
-            animateFadeInUp = "animate__animated animate__fadeInUp";
+            animateFadeInUp = "animate__fadeInUp";
         }
         else animateFadeInUp = "";
             
-        return `<div class="item ${animateFadeInUp}" id="${item.id}">
+        return `<div class="item animate__animated ${animateFadeInUp}" id="item${item.id}">
             <div class="item__check">
                 <input type="checkbox" ${item.checked ? 'checked' : ''}>
             </div>
             <div class="item__content">
                 <div class="item__content__name">
-                    <p> ${item.name} </p>
+                    <p class="${checkClass}"> ${item.name} </p>
                 </div>
                 <div class="item__content__theme ${themeClass}">
                     <p> <em> <i class="${themeIcon}"></i> ${item.theme} </em> </p>
@@ -95,17 +97,19 @@
     //Event : cliquer sur le bouton Add
     btnAdd.addEventListener("click" , (e) => {
         e.preventDefault();
+        if (isModalOpen === true) { return };
         if (inputAdd.value === "") {
             alert("Vous devez saisir quelque chose pour valider !")
             return
         }
         const activeTheme = `${btnFilterActive}`;
-        addItem(items,activeTheme, true);
+        addItem(items, activeTheme, true);
     });
 
     //Event : presser Entrée
     document.addEventListener("keyup" , (e) => {
         e.preventDefault();
+        if (isModalOpen === true) { return }
         if (e.key === "Enter") {
             if (inputAdd.value === "") {
                 alert("Vous devez saisir quelque chose pour valider !")
@@ -117,17 +121,75 @@
     })
 //#endregion
 
+//#region METTRE A JOUR UN ITEM
+    //Fonction : checker un item
+    function checkItem(id) {
+        //Maj l'objet JS dans le tableau items
+        let index = items.findIndex(item => item.id === id);
+        let itemChecked = items[index];
+        itemChecked.checked = itemChecked.checked === false ? true : false;
+
+        //Maj le DOM
+        const itemHTMLChecked = document.querySelector(`#item${id}`);
+        itemHTMLChecked.classList.remove("animate__fadeInUp");
+        itemHTMLChecked.classList.add("animate__fadeOut");
+        const itemHTMLName = itemHTMLChecked.querySelector(".item__content p")
+        itemHTMLName.classList.toggle("check");
+        itemHTMLChecked.addEventListener("animationend" , () => {
+            updateList();
+        });
+    }
+
+    //Fonction : supprimer un item
+    function removeItem(id) {
+        //Maj le tableau items
+        let index = items.findIndex(item => item.id === id);
+        items.splice(index, 1);
+        console.log(items);
+        
+        //Maj le DOM
+        const itemHTMLRemove = document.querySelector(`#item${id}`);
+        itemHTMLRemove.classList.remove("animate__fadeInUp");
+        itemHTMLRemove.classList.remove("animate__fadeOut");
+        itemHTMLRemove.classList.add("animate__fadeOutLeft");
+        itemHTMLRemove.addEventListener("animationend" , () => { //Attendre la fin de l'animation pour suppr
+            itemHTMLRemove.remove();
+        });
+    }
+
+    //Event : cliquer sur un item
+    list.addEventListener("click" , (e) => {
+        let elementId = e.target.parentNode.parentNode.getAttribute("id");
+        elementId = parseInt(elementId.substr(4))
+        if (e.target.tagName === "INPUT") { //Clic sur une checkbox
+            checkItem(elementId);
+            console.log(items);
+        }
+        else if (e.target.tagName === "I") {
+            removeItem(elementId); //Clic sur une corbeille
+            console.log(items);
+        }
+    });
+//#endregion
+
 //#region GERER LA FENÊTRE MODALE
 //La fenêtre modale apparait lors de l'ajout d'une nouvelle tâche sans sélection d'un filtre préalable
+let isModalOpen = false;
 function openModal() {
     return new Promise((resolve) => { //La promise permet d'attendre la sélection pour continuer le code
-        modal.style.display = "block";
+        modal.style.display = "flex";
+        document.querySelector("main").style.opacity = "0.2";
+        document.querySelector("nav").style.opacity = "0.2";
+        isModalOpen = true;
 
         themes.forEach(theme => {
             theme.addEventListener("click", (e) => {
                 const selectedValue = e.target.value;
                 modal.style.display = "none";
+                document.querySelector("main").style.opacity = "1";
+                document.querySelector("nav").style.opacity = "1";
                 resolve(selectedValue);
+                isModalOpen = false;
             });
         });
     });
@@ -135,12 +197,38 @@ function openModal() {
 //#endregion
 
 //#region GERER LES FILTRES
+    let itemsOnList = items;
+    let itemsCompleted = [];
+    let itemsFilter = [];
+
+    //Fonction : mise à jour de la liste
+    function updateList() {
+        let filteredItems = items;
+
+        if (btnListActive === "On the list") {
+            filteredItems = filteredItems.filter(item => item.checked === false);
+        } else if (btnListActive === "Completed") {
+            filteredItems = filteredItems.filter(item => item.checked === true);
+        }
+    
+        if (btnFilterActive !== "All") {
+            filteredItems = filteredItems.filter(item => item.theme === btnFilterActive);
+        }
+
+        list.innerHTML = "";
+        filteredItems.forEach(item => {
+            const itemHTML = createItemHTML(item, item.checked, false);
+            list.insertAdjacentHTML("beforeend", itemHTML);
+        });
+    }
+    
     //Les boutons List
     let btnListActive = "On the list";
     let btnList = document.querySelectorAll(".btn__list");
     btnList.forEach(btn => {
         //Clic sur les boutons
         btn.addEventListener("click" , () => {
+            if (isModalOpen === true) { return }
             //Activer/désactiver les class active
             btnList.forEach(otherBtnList => {
                 if (otherBtnList !== btn) {
@@ -148,7 +236,10 @@ function openModal() {
                 }
             });
             btn.classList.add("active");
+
+            //Appliquer le filtre sélectionné au DOM
             btnListActive = btn.value;
+            updateList();
         });
     });
 
@@ -158,6 +249,7 @@ function openModal() {
     btnFilters.forEach(btn => {
         //Clic sur les boutons
         btn.addEventListener("click" , () => {
+            if (isModalOpen === true) { return }
             //Activer/désactiver les class active
             btnFilters.forEach(otherBtnFilters => {
                 if (otherBtnFilters !== btn) {
@@ -168,16 +260,7 @@ function openModal() {
 
             //Appliquer le filtre sélectionné au DOM
             btnFilterActive = btn.value;
-            let itemsFilter = [];
-            if (btnFilterActive === "All") { //Si All on sélectionne tous les items
-                itemsFilter = items;
-            }
-            else itemsFilter = items.filter(item => item.theme === btnFilterActive); //Sinon on filtre sur le thème sélectionné
-            list.innerHTML = "";
-            itemsFilter.forEach(itemFilter => { //On affiche les items filtrés sur le DOM
-                const itemHTML = createItemHTML(itemFilter,false);
-                list.insertAdjacentHTML("beforeend" , itemHTML);
-            });
+            updateList();
 
             //Mettre à jour le titre de la liste
             switch (btnFilterActive) {

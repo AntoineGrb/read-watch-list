@@ -40,6 +40,11 @@ body {
     }
 }
 
+main {
+    z-index: 0;
+    opacity: 1;
+}
+
 //Textes
 h1 {
     font-family: 'Noto Serif JP', serif;
@@ -252,6 +257,7 @@ nav {
 // -------------- ADD BAR --------------
 .add {
     display: flex;
+    position: relative;
     align-items: center;
     margin: 0 0 var(--margin-mobile) 0;
     padding: 0 var(--padding-mobile) 0 var(--padding-mobile);
@@ -294,26 +300,64 @@ nav {
 // -------------- FENETRE MODALE --------------
 .modal {
     display: none;
-    position: fixed;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top:40%;
+    left:50%;
     z-index: 1; //Défini la position devant le contenu de base
-    left: 50%;
-    top: 50%;
     transform: translate(-50%, -50%); // Centrer la fenêtre modale
-    width: 30%;
-    height: 30%;
+    width: clamp(300px, 80vw , 800px);
+    padding: 2rem;
     overflow:hidden;
     background-color: rgba(0, 0, 0, 0.9);
+    border: 1px solid white;
+
+    * {
+        background-color: inherit; //Tous les enfants héritent du même background-color
+    }
 
     &__content {
-        background-color: rgba(0, 0, 0, 0.9);
-        margin: 15% auto;
-        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @include media-min($tablet) {
+            flex-direction: row;
+            }
 
-        > h3 , button {
-            background-color: rgba(0, 0, 0, 0.9);
+        > h3 {
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        > .theme {
+            padding: 7px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            min-width: 120px;
+
+            &--book {
+                border: 2px solid var(--book-dark);
+                color : var(--book-dark);
+            }
+            &--films {
+                border: 2px solid var(--film-dark);
+                color : var(--film-dark);
+            }
+            &--tv {
+                border: 2px solid var(--tv-dark);
+                color : var(--tv-dark);
+            }
+
+            i {
+                background-color: rgba(0, 0, 0, 0.9); ;
+            }
         }
     }
-  }
+}
+
 // -------------- LIST --------------
 //To do list
 .list {
@@ -359,6 +403,7 @@ nav {
                 top:30%;
                 right: 0;
                 margin-right: 12px;
+                cursor: pointer;
 
                 > i {
                     font-size: 1.2rem;
@@ -402,7 +447,18 @@ nav {
     font-size: 0.9rem;
 }
 
+//Item checked
+.check {
+    color : grey;
+    text-decoration: line-through;
+}
+
+//Animations
 .animate__animated.animate__fadeInUp {
     --animate-duration: 400ms;
     --animate-timing-function: ease-in-out; 
+  }
+
+  .animate__animated.animate__fadeOut {
+    --animate-duration: 500ms;
   }

@@ -47,41 +47,26 @@
             <input id= "input__add" type="text" placeholder="Add your next wish !">
             <button id="btn__add"> Add </button>
         </div>
-        <!----------- Fenêtre modale de sélection du thème ------------>
-        <div id="my-modal" class="modal">
-            <div class="modal__content">
-                <h3> Sélectionner le thème </h3>
-                <button class="theme" value="Books"> Books </button>
-                <button class="theme" value="Films"> Movies </button>
-                <button class="theme" value="TV shows"> TV shows </button>
-            </div>
-        </div>
-
+        
 <!----------- LA LISTE ------------>
         <div class="list">
             <div class="list__title">
                 <h2> To watch & read : </h2>
             </div>
             <div class="list__content">
-                <div class="item" id="0">
-                    <div class="item__check">
-                        <input type="checkbox">
-                    </div>
-                    <div class="item__content">
-                        <div class="item__content__name">
-                            <p> Harry Potter </p>
-                        </div>
-                        <div class="item__content__theme theme--books">
-                            <p> <em> <i class="fas fa-book-open"></i> Livres </em> </p>
-                        </div>
-                    </div>
-                    <div class="item__trash">
-                        <i class="fas fa-trash"></i>
-                    </div>
-                </div>
             </div>
         </div>
     </main>
+
+<!----------- Fenêtre modale de sélection du thème ------------>
+<div id="my-modal" class="modal">
+    <div class="modal__content">
+        <h3> Sélectionner le thème : </h3>
+        <button class="theme theme--book" value="Books"> <i class="fas fa-book-open"> </i> Books </button>
+        <button class="theme theme--films" value="Films"> <i class="fas fa-film"> </i> Movies </button>
+        <button class="theme theme--tv" value="TV shows"> <i class="fas fa-tv"> </i> TV shows </button>
+    </div>
+</div>
 
 </body>
 </html>
