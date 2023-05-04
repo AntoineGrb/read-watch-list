@@ -328,39 +328,39 @@ function openModal() {
 //#endregion
 
 //#region GERER LE GLISSER DEPOSER
-// let el = document.querySelector('.list__content');
-// let sortable = Sortable.create(el, {
-//     onEnd: function (evt) {
-//         updateItemsOrder();
-//     }
-// });
+let el = document.querySelector('.list__content');
+let sortable = Sortable.create(el, {
+    onEnd: function (evt) {
+        updateItemsOrder();
+    }
+});
 
-// function updateItemsOrder() {
-//     // Créez un tableau pour stocker les éléments mis à jour
-//     let updatedItems = [];
+function updateItemsOrder() {
+    // Créez un tableau pour stocker les éléments mis à jour
+    let updatedItems = [];
 
-//     // Parcourez les éléments dans le DOM
-//     const itemElements = document.querySelectorAll('.item');
-//     itemElements.forEach(itemElement => {
-//         // Récupérez l'ID de l'élément
-//         const itemId = parseInt(itemElement.id.replace('item', ''));
+    // Parcourez les éléments dans le DOM
+    const itemElements = document.querySelectorAll('.item');
+    itemElements.forEach(itemElement => {
+        // Récupérez l'ID de l'élément
+        const itemId = parseInt(itemElement.id.replace('item', ''));
 
-//         // Trouvez l'élément correspondant dans l'objet items
-//         const item = items.find(i => i.id === itemId);
+        // Trouvez l'élément correspondant dans l'objet items
+        const item = items.find(i => i.id === itemId);
 
-//         // Ajoutez l'élément à la liste des éléments mis à jour
-//         updatedItems.push(item);
-//     });
+        // Ajoutez l'élément à la liste des éléments mis à jour
+        updatedItems.push(item);
+    });
 
-//     // Ajoutez les éléments non visibles à la liste des éléments mis à jour
-//     items.forEach(item => {
-//         if (!updatedItems.includes(item)) {
-//             updatedItems.push(item);
-//         }
-//     });
+    // Ajoutez les éléments non visibles à la liste des éléments mis à jour
+    items.forEach(item => {
+        if (!updatedItems.includes(item)) {
+            updatedItems.push(item);
+        }
+    });
 
-//     // Remplacez l'objet items par la liste des éléments mis à jour
-//     items = updatedItems;
-//     console.log(items);
-// }
+    // Remplacez l'objet items par la liste des éléments mis à jour
+    items = updatedItems;
+    console.log(items);
+}
 //#endregion
