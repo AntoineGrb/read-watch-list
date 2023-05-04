@@ -28,14 +28,14 @@ import Sortable from './node_modules/sortablejs/modular/sortable.complete.esm.js
 //#endregion
 
 //#region CHARGEMENT DES DONNEES FROM LOCAL STORAGE
-    let items = window.localStorage.getItem("items");
-    if (items === null) {
-        items = [];
-    }
-    else {
-        items = JSON.parse(items);
-        updateList();
-    }
+    // let items = window.localStorage.getItem("items");
+    // if (items === null) {
+    //     items = [];
+    // }
+    // else {
+    //     items = JSON.parse(items);
+    //     updateList();
+    // }
 //#endregion
 
 //#region CREER UN NOUVEL ITEM 
@@ -132,8 +132,8 @@ import Sortable from './node_modules/sortablejs/modular/sortable.complete.esm.js
         addItem(items, activeTheme, true);
 
         //Enregistrer dans le local Storage
-        window.localStorage.setItem("items" , JSON.stringify(items));
-        console.log(JSON.stringify(items));
+        // window.localStorage.setItem("items" , JSON.stringify(items));
+        // console.log(JSON.stringify(items));
     });
 
     //Event : presser Entrée
@@ -153,8 +153,8 @@ import Sortable from './node_modules/sortablejs/modular/sortable.complete.esm.js
             addItem(items,activeTheme, true);
 
             //Enregistrer dans le local Storage
-            window.localStorage.setItem("items" , JSON.stringify(items));
-            console.log(JSON.stringify(items))
+            // window.localStorage.setItem("items" , JSON.stringify(items));
+            // console.log(JSON.stringify(items))
         }
     })
 //#endregion
@@ -202,15 +202,15 @@ import Sortable from './node_modules/sortablejs/modular/sortable.complete.esm.js
             checkItem(elementId);
 
             //Mettre à jour le localStorage
-            window.localStorage.setItem("items" , JSON.stringify(items));
-            console.log(JSON.stringify(items));
+            // window.localStorage.setItem("items" , JSON.stringify(items));
+            // console.log(JSON.stringify(items));
         }
         else if (e.target.tagName === "I") {
             removeItem(elementId); //Clic sur une corbeille
 
             //Mettre à jour le localStorage
-            window.localStorage.setItem("items" , JSON.stringify(items));
-            console.log(JSON.stringify(items));
+            // window.localStorage.setItem("items" , JSON.stringify(items));
+            // console.log(JSON.stringify(items));
         }
     });
 //#endregion
