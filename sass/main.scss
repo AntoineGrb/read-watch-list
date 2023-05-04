@@ -409,10 +409,12 @@ nav {
             }
 
             &__trash {
+                display: flex;
+                justify-content: center;
                 position: absolute;
                 top:30%;
                 right: 0;
-                margin-right: 12px;
+                width: 10%;
                 cursor: pointer;
 
                 > i {

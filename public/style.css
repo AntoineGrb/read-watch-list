@@ -380,10 +380,12 @@ nav .nav__filters {
   margin-bottom: 5px;
 }
 .list__content .item__trash {
+  display: flex;
+  justify-content: center;
   position: absolute;
   top: 30%;
   right: 0;
-  margin-right: 12px;
+  width: 10%;
   cursor: pointer;
 }
 .list__content .item__trash > i {

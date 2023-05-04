@@ -1,5 +1,3 @@
-// import Sortable from './node_modules/sortablejs/modular/sortable.complete.esm.js';
-
 //#region VARIABLES
     //Barre ajout tâche
     const inputAdd = document.querySelector("#input__add");
