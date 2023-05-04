@@ -1,4 +1,4 @@
-import Sortable from './node_modules/sortablejs/modular/sortable.complete.esm.js';
+// import Sortable from './node_modules/sortablejs/modular/sortable.complete.esm.js';
 
 //#region VARIABLES
     //Barre ajout tâche
@@ -28,14 +28,14 @@ import Sortable from './node_modules/sortablejs/modular/sortable.complete.esm.js
 //#endregion
 
 //#region CHARGEMENT DES DONNEES FROM LOCAL STORAGE
-    let items = window.localStorage.getItem("items");
-    if (items === null) {
-        items = [];
-    }
-    else {
-        items = JSON.parse(items);
-        updateList();
-    }
+    // let items = window.localStorage.getItem("items");
+    // if (items === null) {
+    //     items = [];
+    // }
+    // else {
+    //     items = JSON.parse(items);
+    //     updateList();
+    // }
 //#endregion
 
 //#region CREER UN NOUVEL ITEM 
