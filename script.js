@@ -99,10 +99,11 @@
           
         //Création du bloc HTML
         return `<div class="item animate__animated ${animateFadeInUp}" id="item${item.id}">
+        <i class="fa fa-sort"></i>
             <div class="item__check">
                 <input type="checkbox" ${item.checked ? 'checked' : ''}>
             </div>
-            <div class="item__content">
+            <div class="item__content glyphicon glyphicon-move">
                 <div class="item__content__name">
                     <p class="${checkClass}"> ${item.name} </p>
                 </div>
@@ -330,6 +331,8 @@ function openModal() {
 //#region GERER LE GLISSER DEPOSER
 let el = document.querySelector('.list__content');
 let sortable = Sortable.create(el, {
+    handle: '.fa-sort',
+    animation: 400,
     onEnd: function (evt) {
         updateItemsOrder();
     }

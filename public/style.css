@@ -423,6 +423,13 @@ nav .nav__filters {
   font-size: 0.9rem;
 }
 
+.fa-sort {
+  margin-right: 15px;
+  font-size: 1.3rem;
+  opacity: 0.5;
+  cursor: grab;
+}
+
 .check {
   color: grey;
   text-decoration: line-through;

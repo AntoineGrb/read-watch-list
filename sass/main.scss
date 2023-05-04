@@ -440,6 +440,7 @@ nav {
     font-size: 0.8rem;
 }
 
+//Icones theme
 .fa-book-open {
     color:var(--book-dark);
     background-color: var(--background-dark);
@@ -455,6 +456,14 @@ nav {
     color:var(--film-dark);
     background-color: var(--background-dark);
     font-size: 0.9rem;
+}
+
+//Icone drag
+.fa-sort {
+    margin-right: 15px;
+    font-size: 1.3rem;
+    opacity: 0.5;
+    cursor: grab;
 }
 
 //Item checked
