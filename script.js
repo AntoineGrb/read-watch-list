@@ -28,14 +28,14 @@
 //#endregion
 
 //#region CHARGEMENT DES DONNEES FROM LOCAL STORAGE
-    // let items = window.localStorage.getItem("items");
-    // if (items === null) {
-    //     items = [];
-    // }
-    // else {
-    //     items = JSON.parse(items);
-    //     updateList();
-    // }
+    let items = window.localStorage.getItem("items");
+    if (items === null) {
+        items = [];
+    }
+    else {
+        items = JSON.parse(items);
+        updateList();
+    }
 //#endregion
 
 //#region CREER UN NOUVEL ITEM 
