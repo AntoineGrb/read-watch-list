@@ -1,3 +1,5 @@
+import Sortable from './node_modules/sortablejs/modular/sortable.complete.esm.js';
+
 //#region VARIABLES
     //Boutons de sélection
     const btnListOn = document.querySelector(".btn__list--on");
@@ -32,7 +34,13 @@
 //#region CREER UN NOUVEL ITEM 
     //Fonction : Créer le nouvel objet item
     async function addItem(items, itemTheme, animate) {
-        const itemId = items.length === 0 ? 0 : items[items.length - 1].id + 1;
+        let idMax = 0;
+        for (let i=0 ; i < items.length ; i++) {
+            if (items[i].id > idMax) {
+                idMax = items[i].id
+            }
+        }
+        const itemId = idMax + 1;
         const itemName = inputAdd.value;
         if (itemTheme === "All") {
             itemTheme = await openModal();
@@ -41,7 +49,6 @@
         let item = new Item(itemId,itemName,itemTheme,false); 
         items.push(item);
         console.log("items :" , items);
-        console.log("itemsOnList :" , itemsOnList);
 
         //Appel à la fonction pour créer l'objet HTML
         const itemHTML = createItemHTML(item, false, animate);
@@ -58,17 +65,19 @@
         switch (item.theme) {
             case "Books" : 
                 themeIcon = "fas fa-book-open";
-                themeClass = "theme--books"
+                themeClass = "theme--books";
             break
             case "Films" :
                 themeIcon = "fas fa-film";
-                themeClass = "theme--films"
+                themeClass = "theme--films";
             break
             case "TV shows" :
                 themeIcon = "fas fa-tv" ;
-                themeClass = "theme--tv"
+                themeClass = "theme--tv";
             break
-            default : themeIcon = "fas fa-book-open";
+            default : 
+            themeIcon = "fas fa-book-open";
+            themeClass = "theme--books";
         };
         //L'animation déclenchée ou non selon le clic
         let animateFadeInUp;
@@ -98,8 +107,12 @@
     btnAdd.addEventListener("click" , (e) => {
         e.preventDefault();
         if (isModalOpen === true) { return };
-        if (inputAdd.value === "") {
+        console.log("btnListActive" , btnListActive)
+        if (inputAdd.value === "" && btnListActive === "On the list") {
             alert("Vous devez saisir quelque chose pour valider !")
+            return
+        }
+        else if (inputAdd.value === "" && btnListActive === "Completed") {
             return
         }
         const activeTheme = `${btnFilterActive}`;
@@ -111,8 +124,12 @@
         e.preventDefault();
         if (isModalOpen === true) { return }
         if (e.key === "Enter") {
-            if (inputAdd.value === "") {
+            console.log("btnListActive" , btnListActive)
+            if (inputAdd.value === "" && btnListActive === "On the list") {
                 alert("Vous devez saisir quelque chose pour valider !")
+                return
+            }
+            else if (inputAdd.value === "" && btnListActive === "Completed") {
                 return
             }
             const activeTheme = `${btnFilterActive}`;
@@ -197,10 +214,6 @@ function openModal() {
 //#endregion
 
 //#region GERER LES FILTRES
-    let itemsOnList = items;
-    let itemsCompleted = [];
-    let itemsFilter = [];
-
     //Fonction : mise à jour de la liste
     function updateList() {
         let filteredItems = items;
@@ -239,6 +252,17 @@ function openModal() {
 
             //Appliquer le filtre sélectionné au DOM
             btnListActive = btn.value;
+            console.log("btnListActive" , btnListActive)
+            if (btnListActive === "Completed") {
+                inputAdd.disabled = true;
+                btnAdd.disabled = true;
+                btnAdd.classList.add("add__btn--disabled");
+            }
+            else {
+                inputAdd.disabled = false;
+                btnAdd.disabled = false;
+                btnAdd.classList.remove("add__btn--disabled");
+            }
             updateList();
         });
     });
@@ -261,6 +285,7 @@ function openModal() {
             //Appliquer le filtre sélectionné au DOM
             btnFilterActive = btn.value;
             updateList();
+            //! Pour ALL ajouter un tri par défaut sur le thème alphabetique
 
             //Mettre à jour le titre de la liste
             switch (btnFilterActive) {
@@ -279,3 +304,40 @@ function openModal() {
     }); 
 //#endregion
 
+//#region GERER LE GLISSER DEPOSER
+let el = document.querySelector('.list__content');
+let sortable = Sortable.create(el, {
+    onEnd: function (evt) {
+        updateItemsOrder();
+    }
+});
+
+function updateItemsOrder() {
+    // Créez un tableau pour stocker les éléments mis à jour
+    let updatedItems = [];
+
+    // Parcourez les éléments dans le DOM
+    const itemElements = document.querySelectorAll('.item');
+    itemElements.forEach(itemElement => {
+        // Récupérez l'ID de l'élément
+        const itemId = parseInt(itemElement.id.replace('item', ''));
+
+        // Trouvez l'élément correspondant dans l'objet items
+        const item = items.find(i => i.id === itemId);
+
+        // Ajoutez l'élément à la liste des éléments mis à jour
+        updatedItems.push(item);
+    });
+
+    // Ajoutez les éléments non visibles à la liste des éléments mis à jour
+    items.forEach(item => {
+        if (!updatedItems.includes(item)) {
+            updatedItems.push(item);
+        }
+    });
+
+    // Remplacez l'objet items par la liste des éléments mis à jour
+    items = updatedItems;
+    console.log(items);
+}
+//#endregion

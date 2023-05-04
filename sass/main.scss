@@ -268,7 +268,7 @@ nav {
         margin: 0 0 var(--margin-mobile) 0;
         }
 
-    input {
+    &__input {
         width: 90%;
         height: 2.8rem;
         margin-right: 0px;
@@ -277,7 +277,7 @@ nav {
         border-radius: 2px;
     }
 
-    button {
+    &__btn {
         width: 15%;
         height: 2.9rem;
         background-color: var(--main-color-dark);
@@ -293,6 +293,16 @@ nav {
         
         &:hover {
             background-color: var(--hover-color-dark);
+        }
+            
+        &--disabled {
+            background-color: grey;
+            border: 1px solid grey;
+            cursor: auto;
+
+            &:hover {
+                background-color: grey;
+            }
         }
     }
 }
@@ -454,11 +464,7 @@ nav {
 }
 
 //Animations
-.animate__animated.animate__fadeInUp {
+.animate__animated {
     --animate-duration: 400ms;
     --animate-timing-function: ease-in-out; 
-  }
-
-  .animate__animated.animate__fadeOut {
-    --animate-duration: 500ms;
   }

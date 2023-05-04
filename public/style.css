@@ -255,7 +255,7 @@ nav .nav__filters {
     margin: 0 0 var(--margin-mobile) 0;
   }
 }
-.add input {
+.add__input {
   width: 90%;
   height: 2.8rem;
   margin-right: 0px;
@@ -263,7 +263,7 @@ nav .nav__filters {
   padding: 0 0.5rem 0 0.5rem;
   border-radius: 2px;
 }
-.add button {
+.add__btn {
   width: 15%;
   height: 2.9rem;
   background-color: var(--main-color-dark);
@@ -275,12 +275,20 @@ nav .nav__filters {
   transition: all 100ms;
 }
 @media screen and (min-width: 1000px) {
-  .add button {
+  .add__btn {
     width: 150px;
   }
 }
-.add button:hover {
+.add__btn:hover {
   background-color: var(--hover-color-dark);
+}
+.add__btn--disabled {
+  background-color: grey;
+  border: 1px solid grey;
+  cursor: auto;
+}
+.add__btn--disabled:hover {
+  background-color: grey;
 }
 
 .modal {
@@ -420,13 +428,9 @@ nav .nav__filters {
   text-decoration: line-through;
 }
 
-.animate__animated.animate__fadeInUp {
+.animate__animated {
   --animate-duration: 400ms;
   --animate-timing-function: ease-in-out;
-}
-
-.animate__animated.animate__fadeOut {
-  --animate-duration: 500ms;
 }
 
 /*# sourceMappingURL=style.css.map */
