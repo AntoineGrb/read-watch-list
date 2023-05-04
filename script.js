@@ -28,14 +28,14 @@ import Sortable from './node_modules/sortablejs/modular/sortable.complete.esm.js
 //#endregion
 
 //#region CHARGEMENT DES DONNEES FROM LOCAL STORAGE
-    // let items = window.localStorage.getItem("items");
-    // if (items === null) {
-    //     items = [];
-    // }
-    // else {
-    //     items = JSON.parse(items);
-    //     updateList();
-    // }
+    let items = window.localStorage.getItem("items");
+    if (items === null) {
+        items = [];
+    }
+    else {
+        items = JSON.parse(items);
+        updateList();
+    }
 //#endregion
 
 //#region CREER UN NOUVEL ITEM 
@@ -132,8 +132,8 @@ import Sortable from './node_modules/sortablejs/modular/sortable.complete.esm.js
         addItem(items, activeTheme, true);
 
         //Enregistrer dans le local Storage
-        // window.localStorage.setItem("items" , JSON.stringify(items));
-        // console.log(JSON.stringify(items));
+        window.localStorage.setItem("items" , JSON.stringify(items));
+        console.log(JSON.stringify(items));
     });
 
     //Event : presser Entrée
@@ -153,8 +153,8 @@ import Sortable from './node_modules/sortablejs/modular/sortable.complete.esm.js
             addItem(items,activeTheme, true);
 
             //Enregistrer dans le local Storage
-            // window.localStorage.setItem("items" , JSON.stringify(items));
-            // console.log(JSON.stringify(items))
+            window.localStorage.setItem("items" , JSON.stringify(items));
+            console.log(JSON.stringify(items))
         }
     })
 //#endregion
@@ -200,18 +200,14 @@ import Sortable from './node_modules/sortablejs/modular/sortable.complete.esm.js
         elementId = parseInt(elementId.substr(4))
         if (e.target.tagName === "INPUT") { //Clic sur une checkbox
             checkItem(elementId);
-
-            //Mettre à jour le localStorage
-            // window.localStorage.setItem("items" , JSON.stringify(items));
-            // console.log(JSON.stringify(items));
         }
         else if (e.target.tagName === "I") {
             removeItem(elementId); //Clic sur une corbeille
-
-            //Mettre à jour le localStorage
-            // window.localStorage.setItem("items" , JSON.stringify(items));
-            // console.log(JSON.stringify(items));
         }
+
+        //Mettre à jour le localStorage
+        window.localStorage.setItem("items" , JSON.stringify(items));
+        console.log(JSON.stringify(items));
     });
 //#endregion
 
@@ -332,39 +328,39 @@ function openModal() {
 //#endregion
 
 //#region GERER LE GLISSER DEPOSER
-let el = document.querySelector('.list__content');
-let sortable = Sortable.create(el, {
-    onEnd: function (evt) {
-        updateItemsOrder();
-    }
-});
+// let el = document.querySelector('.list__content');
+// let sortable = Sortable.create(el, {
+//     onEnd: function (evt) {
+//         updateItemsOrder();
+//     }
+// });
 
-function updateItemsOrder() {
-    // Créez un tableau pour stocker les éléments mis à jour
-    let updatedItems = [];
+// function updateItemsOrder() {
+//     // Créez un tableau pour stocker les éléments mis à jour
+//     let updatedItems = [];
 
-    // Parcourez les éléments dans le DOM
-    const itemElements = document.querySelectorAll('.item');
-    itemElements.forEach(itemElement => {
-        // Récupérez l'ID de l'élément
-        const itemId = parseInt(itemElement.id.replace('item', ''));
+//     // Parcourez les éléments dans le DOM
+//     const itemElements = document.querySelectorAll('.item');
+//     itemElements.forEach(itemElement => {
+//         // Récupérez l'ID de l'élément
+//         const itemId = parseInt(itemElement.id.replace('item', ''));
 
-        // Trouvez l'élément correspondant dans l'objet items
-        const item = items.find(i => i.id === itemId);
+//         // Trouvez l'élément correspondant dans l'objet items
+//         const item = items.find(i => i.id === itemId);
 
-        // Ajoutez l'élément à la liste des éléments mis à jour
-        updatedItems.push(item);
-    });
+//         // Ajoutez l'élément à la liste des éléments mis à jour
+//         updatedItems.push(item);
+//     });
 
-    // Ajoutez les éléments non visibles à la liste des éléments mis à jour
-    items.forEach(item => {
-        if (!updatedItems.includes(item)) {
-            updatedItems.push(item);
-        }
-    });
+//     // Ajoutez les éléments non visibles à la liste des éléments mis à jour
+//     items.forEach(item => {
+//         if (!updatedItems.includes(item)) {
+//             updatedItems.push(item);
+//         }
+//     });
 
-    // Remplacez l'objet items par la liste des éléments mis à jour
-    items = updatedItems;
-    console.log(items);
-}
+//     // Remplacez l'objet items par la liste des éléments mis à jour
+//     items = updatedItems;
+//     console.log(items);
+// }
 //#endregion
