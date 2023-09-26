@@ -9,6 +9,8 @@
   "author": "AntoineG",
   "license": "ISC",
   "dependencies": {
+    "mongodb": "^5.8.0",
+    "mongoose": "^7.3.3",
     "sortablejs": "^1.15.0"
   }
 }
