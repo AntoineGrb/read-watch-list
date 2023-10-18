@@ -12,6 +12,7 @@ Je cherchais un projet de développement de type to-do list, et j'ai souhaité c
 ![image](https://github.com/AntoineGrb/read-watch-list/assets/119600392/e9c09a92-f707-4be9-977a-35e9f58603e0)
 
 
+
 ### Ajouter une entrée à la liste
 Pour ajouter une nouvelle entrée, deux possibilités : 
 - Choisir un univers dans les filtres (films, tv show ou books), puis saisir l'entrée dans l'input central et valider en touchant "add" (appuyer sur Entrée sur pc).
