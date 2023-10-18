@@ -9,7 +9,8 @@ Je l'ai uploadé sur Vercel, voici le [lien](https://read-watch-list.vercel.app/
 Je cherchais un projet de développement de type to-do list, et j'ai souhaité créé une petite application pour ma liste de films et livres à voir. L'application est surtout conçu pour être utilisée sur téléphone.
 
 ## Comment ça marche ? 📖
-![image](https://github.com/AntoineGrb/read-watch-list/assets/119600392/c6612b73-74b7-4913-a226-9c48cbe6dc81)
+![image](https://github.com/AntoineGrb/read-watch-list/assets/119600392/e9c09a92-f707-4be9-977a-35e9f58603e0)
+
 
 ### Ajouter une entrée à la liste
 Pour ajouter une nouvelle entrée, deux possibilités : 
